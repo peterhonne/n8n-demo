@@ -1,0 +1,1098 @@
+{
+  "name": "Demo Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        128,
+        -400
+      ],
+      "id": "bcfd000e-c471-4104-9ecb-0e6b6b8959c4",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.Message }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "Sales Inquiry",
+              "description": "Messages from clinics, practices, or healthcare providers interested in Hendrix Health’s products, solutions, pricing, or partnerships."
+            },
+            {
+              "category": "Other",
+              "description": "Any message that doesn’t fit the above categorie or is unclear, spam-like, or irrelevant."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1.1,
+      "position": [
+        -224,
+        -592
+      ],
+      "id": "42357b99-a7e7-4ed3-b893-1618c7a90558",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1fWzTr00D_k77HITuS9a5BIK9u7O478rl",
+          "mode": "list",
+          "cachedResultName": "Knowledge Database",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1fWzTr00D_k77HITuS9a5BIK9u7O478rl"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -1488
+      ],
+      "id": "ff74db0e-f5a3-4fd0-add2-75a1cffd86ed",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "k3rRrnlerSN6kcpU",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n-demo",
+          "mode": "list",
+          "cachedResultName": "n8n-demo"
+        },
+        "options": {
+          "pineconeNamespace": "={{ $json.info.Title }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        -1696
+      ],
+      "id": "54b586e8-ba83-46d1-9554-e50a2b2d0fea",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "h7TDaK1iZTFm1gMt",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        272,
+        -1472
+      ],
+      "id": "2c466af2-ebe6-43c4-a3e4-83d31d657c7f",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X6YUxxMX811Irjah",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -176,
+        -1488
+      ],
+      "id": "b863cfc9-a88f-47e5-8c64-e6dafd67ff54",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "k3rRrnlerSN6kcpU",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.text }}",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        400,
+        -1472
+      ],
+      "id": "27d506d5-a662-4660-a5c7-544261c92632",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        48,
+        -1488
+      ],
+      "id": "78eaf435-ab99-4bb4-817f-cd08dc7ebb0a",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "content": "## Knowledge Database Pipeline\nWhen a new PDF is uploaded to Google Drive, this workflow ingests it into Pinecone as embeddings. \nSupports RAG lookups for technical support and clinician onboarding.",
+        "height": 656,
+        "width": 1712
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -576,
+        -1776
+      ],
+      "typeVersion": 1,
+      "id": "aa544368-5d52-4e28-aa66-55b0da62b5c9",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -368
+      ],
+      "id": "a0d7cf0f-59af-4def-ade9-d7c0e24d61f0",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X6YUxxMX811Irjah",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.content.parts[0].text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        704,
+        -592
+      ],
+      "id": "103f3c26-74b4-4ada-bff7-e6632fd48f7d",
+      "name": "Markdown"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        128,
+        -784
+      ],
+      "id": "d4a5a7a8-a363-4b14-92c4-49f153ea2030",
+      "name": "No Operation, do nothing2"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1SCE-nQELxoqTOm01U7zrB25meNYtgiQ-0SW5lwiEAUc",
+          "mode": "list",
+          "cachedResultName": "New Contact",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SCE-nQELxoqTOm01U7zrB25meNYtgiQ-0SW5lwiEAUc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "contact_info",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SCE-nQELxoqTOm01U7zrB25meNYtgiQ-0SW5lwiEAUc/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "First name",
+              "displayName": "First name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Work email",
+              "displayName": "Work email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contact number",
+              "displayName": "Contact number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Organisation name",
+              "displayName": "Organisation name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Message",
+              "displayName": "Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "formMode",
+              "displayName": "formMode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        -976
+      ],
+      "id": "0c149af5-b9f2-4980-a792-4ff4cedd52e7",
+      "name": "Add a new record in New Contact Table",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yAvNuWD1j5ud3W6K",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json['Work email'] }}",
+        "subject": "Thank you for contacting MediBridge Health!",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Thank You for Your Inquiry</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      line-height: 1.6;\n      color: #333333;\n    }\n    .container {\n      max-width: 600px;\n      margin: 0 auto;\n      padding: 20px;\n      border: 1px solid #e0e0e0;\n      border-radius: 8px;\n      background-color: #f9f9f9;\n    }\n    .header {\n      font-size: 22px;\n      font-weight: bold;\n      color: #2c3e50;\n      margin-bottom: 10px;\n    }\n    .content {\n      margin-top: 10px;\n    }\n    .footer {\n      margin-top: 20px;\n      font-size: 14px;\n      color: #777777;\n    }\n    .button {\n      display: inline-block;\n      padding: 10px 20px;\n      margin-top: 15px;\n      background-color: #0078d7;\n      color: #ffffff !important;\n      text-decoration: none;\n      border-radius: 5px;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      Thank You for Your Inquiry!\n    </div>\n    <div class=\"content\">\n      <p>Hello {{ $json['First name'] }},</p>\n      \n      <p>Thank you for reaching out to MediBridge Health. We have received your message and our Sales Team will review it shortly.</p>\n      \n      <p>Our team is excited to explore how MediBridge Health’s AI-driven solutions can support your organization. We’ll follow up with you as soon as possible.</p>\n\n    <div class=\"footer\">\n      <p>Best regards,<br>\n      MediBridge Health Team</p>\n      <p style=\"font-size:12px;\">This is an automated message. Please do not reply directly to this email.</p>\n    </div>\n  </div>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        416,
+        -784
+      ],
+      "id": "a92e57f8-275b-4ed2-b877-ef66c8a3e7cc",
+      "name": "Send auto-acknowledgment email",
+      "webhookId": "dcab04b4-7b78-48c5-91f8-f7c6d2909727",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pNPwvjWOYj3aQ01B",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "xu541197672@gmail.com",
+        "subject": "New Enquiry",
+        "message": "={{ $json.data }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        928,
+        -592
+      ],
+      "id": "fcddf62a-a8dc-42ec-bd28-cac3919eb915",
+      "name": "Send a message to sales team",
+      "webhookId": "0147d8cd-c5da-4a3b-97b7-4680f856d66e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pNPwvjWOYj3aQ01B",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an AI assistant helping MediBridge Health research organizations that contact us.\n\nInputs you will receive:\n- Contact Name: {{ $json['First name'] }} {{ $json['Last Name'] }}\n- Email: {{ $json['Work email'] }}\n- Mobile: {{ $json['Contact number'] }}\n- Message: {{ $json.Message }}\n- Company: {{ $json['Organisation name'] }}\n\nYour task is to turn a new Contact Us form submission into a polished internal email that contains:\n1. Contact details you received.  \n2. Original message from the sender.  \n3. AI-generated company research:  \n   - Company Name  \n   - Industry  \n   - Location  \n   - Summary of business/products/services/vision/mission  \n   - Healthcare relevance  \n   - Potential interest in Hendrix Health’s solutions  \n   - Website (if available)\n4. Urgency classification (Low/Medium/High) with a one-line reason.  \n5. Suggested next actions for the Sales Team.  \n\nFormat the output as a professional internal email with the following structure:  \nHello Sales Team,  \n\nA new sales inquiry has been submitted via the Contact Us form.  \nHere are the details and AI-generated briefing:  \n\nContact Details  \n....\n\nMessage Submitted  \n\"...\"\n\nAI Research on Company  \n- Company Name: ...  \n- Industry: ...  \n- Location: ...  \n- Summary: ...  \n- Healthcare Relevance: ...  \n- Potential Interest in Hendrix: ...  \n\nUrgency Classification  \n- Category: Sales Inquiry  \n- Urgency: ...  \n\nNext Actions (Suggested)  \n\n\nAvoid using conversation tone."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        352,
+        -592
+      ],
+      "id": "da2bc416-f8c8-46ca-8e6c-b6385217e6cf",
+      "name": "Draft the email",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X6YUxxMX811Irjah",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "Contact us",
+        "formDescription": "Have a question or want to learn more? Send us a message, and we’ll get back to you soon!",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "First name",
+              "placeholder": "Your first name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Last Name",
+              "placeholder": "Your last name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Work email",
+              "fieldType": "email",
+              "placeholder": "Your company email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Contact number",
+              "placeholder": "Your contact number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Organisation name",
+              "placeholder": "Your organisation name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Message",
+              "fieldType": "textarea",
+              "placeholder": "Enter any additional information",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -448,
+        -592
+      ],
+      "id": "0d14f0b5-6698-4046-9e77-e2c89a0e9e85",
+      "name": "Contact Us Form",
+      "webhookId": "63f9e5df-4caa-4d91-b790-ba9dbfa7a960"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "778a86da-c77a-4c78-82ea-50e131b47e01",
+        "authentication": "jwtAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -320,
+        -80
+      ],
+      "id": "1adb02a2-d722-4799-b5d0-ec87c5bb0c37",
+      "name": "Webhook",
+      "webhookId": "778a86da-c77a-4c78-82ea-50e131b47e01",
+      "credentials": {
+        "jwtAuth": {
+          "id": "IQQF588zmpMZWdeZ",
+          "name": "JWT Auth account 2"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.message }}",
+        "options": {
+          "systemPromptTemplate": "=You are an AI assistant helping MediBridge Health’s Technical Support Team quickly resolve incoming clinician or staff issues.  \n\n- Ticket submitted by: {{ $json.body.submitted_by.name }}\n- Role: {{ $json.body.submitted_by.role }}\n- Contact: {{ $json.body.submitted_by.email }} / {{ $json.body.submitted_by.mobile }}\n- Issue description: \"{{ $json.body.message }}\"\n- Additional metadata: {{ $json.body.ticket_id }}, {{ $json.body.submitted_at }}\n- Vector database search results: [list of relevant docs, or top N embeddings]\n\n\nYour task is to produce a concise, plain-English summary to help the support engineer resolve the issue faster. Include:\n\n\n1. **Original Question / Issue**: Restate the question in one clear sentence.  \n2. **Relevant Documentation**: List the 2–3 most relevant internal documents or guidance notes (title + brief description / key point).  \n3. **Suggested Next Steps**: Provide 2–3 actionable suggestions for the support staff to address the issue.  \n4. Keep the output in **plain English**, professional, summarize and highlight the most actionable info.  \n\nFormat the output like this:\n\n---\nHello Support Team,\n\nA new technical support ticket has been submitted. Here are the details:\n\nTicket Info:\n- Submitted by: \n- Role: \n- Contact: \n- Ticket ID: \n- Submitted At: \n- Original Message: \n\n**Support Request Summary:**  \n[Concise plain-English summary of the issue]\n\n**Relevant Documentation:**  \n- [List of key points, links, or instructions from vector DB results]\n\n**Suggested Next Steps:**  \n1. [Step-by-step guidance or links for resolution]\n2. [Optional: escalate if high urgency]\n---\n\nDo not include any filler text or explanations. Focus only on **what the support team needs to know and do**.\n\nIf you don't know the answer, just say that you don't know, don't try to make up an answer.\n----------------\nContext: {context}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+      "typeVersion": 1.6,
+      "position": [
+        -64,
+        -80
+      ],
+      "id": "c0f20755-73c5-44c0-bed6-26e98d6d047d",
+      "name": "Question and Answer Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        144
+      ],
+      "id": "ae41fe13-d633-4159-ab12-4ba26cd4e4b6",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X6YUxxMX811Irjah",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.retrieverVectorStore",
+      "typeVersion": 1,
+      "position": [
+        32,
+        144
+      ],
+      "id": "f9aa17e1-d720-4969-8ca9-fe1a58dfb5dd",
+      "name": "Vector Store Retriever"
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n-demo",
+          "mode": "list",
+          "cachedResultName": "n8n-demo"
+        },
+        "useReranker": true,
+        "options": {
+          "pineconeNamespace": "Heidi Health Technical Documentation"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        32,
+        352
+      ],
+      "id": "3416b4bc-b531-49b8-a1b6-2221e2e7f59a",
+      "name": "Pinecone Vector Store1",
+      "credentials": {
+        "pineconeApi": {
+          "id": "h7TDaK1iZTFm1gMt",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        48,
+        560
+      ],
+      "id": "3074de4b-8d86-449f-a272-49505e487643",
+      "name": "Embeddings Google Gemini1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X6YUxxMX811Irjah",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        176,
+        560
+      ],
+      "id": "e614bd2a-672c-40d4-b9fc-5055d994ffb9",
+      "name": "Reranker Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "FzJBB7ERJwf7Pfr3",
+          "name": "CohereApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chunkSize": 500,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        480,
+        -1264
+      ],
+      "id": "d9adf1ba-36c3-4da8-ac52-4ca29b3f3e7a",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.response }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -80
+      ],
+      "id": "21949251-8f5a-41a2-ac12-b985171e13e7",
+      "name": "Markdown1"
+    },
+    {
+      "parameters": {
+        "sendTo": "xu541197672@gmail.com",
+        "subject": "New Clinician Support Request",
+        "message": "={{ $json.data }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        624,
+        -80
+      ],
+      "id": "518a65fe-106b-4dd6-96d7-758d7f40f192",
+      "name": "Send a message to technical support team",
+      "webhookId": "0147d8cd-c5da-4a3b-97b7-4680f856d66e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pNPwvjWOYj3aQ01B",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Smart Lead Capture Pipeline\nCaptures Contact Us form submissions, classifies them with AI, and routes accordingly. \nSales inquiries trigger auto-ack emails, company research, and enriched notifications to Sales. \nOther inquiries are logged separately for reporting.",
+        "height": 816,
+        "width": 1712
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -576,
+        -1040
+      ],
+      "typeVersion": 1,
+      "id": "67292f00-9d50-4c22-8023-0cb51f8b1da1",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Technical Support Pipeline\nTriggered via secure webhook with JWT auth. Summarizes clinician issue, retrieves relevant docs from Pinecone, \nand drafts an email with request summary, relevant documentation, and suggested next steps for the support team.",
+        "height": 880,
+        "width": 1712
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -576,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "073e8a7e-a797-4537-a0d1-327ab3e55955",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1SCE-nQELxoqTOm01U7zrB25meNYtgiQ-0SW5lwiEAUc",
+          "mode": "list",
+          "cachedResultName": "New Contact",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SCE-nQELxoqTOm01U7zrB25meNYtgiQ-0SW5lwiEAUc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 389814345,
+          "mode": "list",
+          "cachedResultName": "Other",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SCE-nQELxoqTOm01U7zrB25meNYtgiQ-0SW5lwiEAUc/edit#gid=389814345"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "First name",
+              "displayName": "First name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Work email",
+              "displayName": "Work email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contact number",
+              "displayName": "Contact number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Organisation name",
+              "displayName": "Organisation name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Message",
+              "displayName": "Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "formMode",
+              "displayName": "formMode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        -400
+      ],
+      "id": "308c9c43-d9ac-4fbb-958e-32a6d049a2f6",
+      "name": "Add a new record",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yAvNuWD1j5ud3W6K",
+          "name": "Google Sheets account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Contact Us Form": [
+      {
+        "json": {
+          "First name": "Peter",
+          "Last Name": "Zhang",
+          "Work email": "xu541197672@gmail.com",
+          "Contact number": "0274734266",
+          "Organisation name": "Middlemore Hospital",
+          "Message": "We are planning to adopt Heidi. We would like to know the pricing, training plan",
+          "submittedAt": "2025-09-21T11:55:49.866+12:00",
+          "formMode": "test"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [],
+        []
+      ]
+    },
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown": {
+      "main": [
+        [
+          {
+            "node": "Send a message to sales team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Operation, do nothing2": {
+      "main": [
+        [
+          {
+            "node": "Add a new record in New Contact Table",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Draft the email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send auto-acknowledgment email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add a new record in New Contact Table": {
+      "main": [
+        []
+      ]
+    },
+    "Draft the email": {
+      "main": [
+        [
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contact Us Form": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Operation, do nothing": {
+      "main": [
+        [
+          {
+            "node": "Add a new record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Question and Answer Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector Store Retriever": {
+      "ai_retriever": [
+        [
+          {
+            "node": "Question and Answer Chain",
+            "type": "ai_retriever",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store1": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Vector Store Retriever",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Question and Answer Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere": {
+      "ai_reranker": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown1": {
+      "main": [
+        [
+          {
+            "node": "Send a message to technical support team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Question and Answer Chain": {
+      "main": [
+        [
+          {
+            "node": "Markdown1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "53d49d1b-49ff-4f34-872c-45ab0dc86ef8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b6970bc56a14a1bd0b6ef83593f58eb8bb54c69fa18b29d5790d2a877acefd6d"
+  },
+  "id": "cgVL3s0UWZ9Gczfp",
+  "tags": []
+}
