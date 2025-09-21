@@ -27,6 +27,8 @@ The goal is to reduce manual work, speed up responses, and provide plain-English
 
 **Outcome:** A searchable knowledge base ready to power RAG workflows.
 
+<img width="1387" height="526" alt="Knowledge Database Pipeline" src="https://github.com/user-attachments/assets/e0f6e110-eb3b-49fd-a6ad-888ff5004bfc" />
+
 ---
 
 ### 2. Contact Routing & Sales Insights
@@ -48,6 +50,8 @@ The goal is to reduce manual work, speed up responses, and provide plain-English
 
 **Outcome:** Faster lead triage, enriched sales intelligence, and structured record-keeping.
 
+<img width="1390" height="658" alt="Smart Lead Capture Pipeline" src="https://github.com/user-attachments/assets/87e91d15-7886-460a-aecf-253d0b1adfc5" />
+
 ---
 
 ### 3. Technical Support Pipeline
@@ -65,13 +69,15 @@ The goal is to reduce manual work, speed up responses, and provide plain-English
 
 **Outcome:** Support staff receive AI-assisted summaries and relevant resources, enabling faster, more accurate responses.
 
+<img width="1209" height="618" alt="Technical Support Pipeline" src="https://github.com/user-attachments/assets/a31ccd1a-d275-4c4d-bddb-4276ff2cb4fc" />
+
 ---
 
 ## 🛠️ Tech Stack
 
 - **Automation & Orchestration:** n8n  
 - **Vector Database:** Pinecone  
-- **Embedding & LLM:** Gemini Embeddings / Gemini LLM  
+- **Embedding & LLM:** Gemini Embeddings / Gemini LLM  / Cohere
 - **Data Sources:** Google Drive, Google Sheets
 - **Security:** JWT authentication, audit logging
 - **Notifications:** Gmail 
