@@ -7,9 +7,9 @@
       "typeVersion": 1,
       "position": [
         128,
-        -400
+        -656
       ],
-      "id": "bcfd000e-c471-4104-9ecb-0e6b6b8959c4",
+      "id": "f08e970e-3cbe-438c-9dcf-3865ead26b99",
       "name": "No Operation, do nothing"
     },
     {
@@ -33,9 +33,9 @@
       "typeVersion": 1.1,
       "position": [
         -224,
-        -592
+        -848
       ],
-      "id": "42357b99-a7e7-4ed3-b893-1618c7a90558",
+      "id": "3e04ab98-0b74-4b3f-8989-7fbb1564eb8c",
       "name": "Text Classifier"
     },
     {
@@ -62,13 +62,13 @@
       "typeVersion": 1,
       "position": [
         -400,
-        -1488
+        -1744
       ],
-      "id": "ff74db0e-f5a3-4fd0-add2-75a1cffd86ed",
+      "id": "4b14b75b-d4f0-4e14-8fb3-1b9780d66eb7",
       "name": "Google Drive Trigger",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "k3rRrnlerSN6kcpU",
+          "id": "G3Bmrn5qVh1swWC5",
           "name": "Google Drive account"
         }
       }
@@ -90,13 +90,13 @@
       "typeVersion": 1.3,
       "position": [
         304,
-        -1696
+        -1952
       ],
-      "id": "54b586e8-ba83-46d1-9554-e50a2b2d0fea",
+      "id": "fd7f6ae3-1112-4441-9338-48b0505c9e09",
       "name": "Pinecone Vector Store",
       "credentials": {
         "pineconeApi": {
-          "id": "h7TDaK1iZTFm1gMt",
+          "id": "G3tRev9RsBUaFva1",
           "name": "PineconeApi account"
         }
       }
@@ -107,13 +107,13 @@
       "typeVersion": 1,
       "position": [
         272,
-        -1472
+        -1728
       ],
-      "id": "2c466af2-ebe6-43c4-a3e4-83d31d657c7f",
+      "id": "74a1fa7b-d8e9-4674-94b7-76c7228b5808",
       "name": "Embeddings Google Gemini",
       "credentials": {
         "googlePalmApi": {
-          "id": "X6YUxxMX811Irjah",
+          "id": "fWX7PGXpKXwd8M2r",
           "name": "Google Gemini(PaLM) Api account"
         }
       }
@@ -132,13 +132,13 @@
       "typeVersion": 3,
       "position": [
         -176,
-        -1488
+        -1744
       ],
-      "id": "b863cfc9-a88f-47e5-8c64-e6dafd67ff54",
+      "id": "5e1899b8-c757-455c-8857-d2eb8b452024",
       "name": "Download file",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "k3rRrnlerSN6kcpU",
+          "id": "G3Bmrn5qVh1swWC5",
           "name": "Google Drive account"
         }
       }
@@ -154,9 +154,9 @@
       "typeVersion": 1.1,
       "position": [
         400,
-        -1472
+        -1728
       ],
-      "id": "27d506d5-a662-4660-a5c7-544261c92632",
+      "id": "8f6e8718-391a-44dd-af80-a76a052aff10",
       "name": "Default Data Loader"
     },
     {
@@ -168,9 +168,9 @@
       "typeVersion": 1,
       "position": [
         48,
-        -1488
+        -1744
       ],
-      "id": "78eaf435-ab99-4bb4-817f-cd08dc7ebb0a",
+      "id": "dd95dced-8a41-429a-83a2-6faf35071256",
       "name": "Extract from File"
     },
     {
@@ -182,10 +182,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -576,
-        -1776
+        -2032
       ],
       "typeVersion": 1,
-      "id": "aa544368-5d52-4e28-aa66-55b0da62b5c9",
+      "id": "ec759471-8b3d-43e6-9edf-c27d5b19bbbd",
       "name": "Sticky Note"
     },
     {
@@ -196,13 +196,13 @@
       "typeVersion": 1,
       "position": [
         -160,
-        -368
+        -624
       ],
-      "id": "a0d7cf0f-59af-4def-ade9-d7c0e24d61f0",
+      "id": "db4799f2-b2c1-4c7f-a25f-c665eac5122a",
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
-          "id": "X6YUxxMX811Irjah",
+          "id": "fWX7PGXpKXwd8M2r",
           "name": "Google Gemini(PaLM) Api account"
         }
       }
@@ -217,9 +217,9 @@
       "typeVersion": 1,
       "position": [
         704,
-        -592
+        -848
       ],
-      "id": "103f3c26-74b4-4ada-bff7-e6632fd48f7d",
+      "id": "94da3ef8-7941-45d2-9315-283afe2e0ad5",
       "name": "Markdown"
     },
     {
@@ -228,9 +228,9 @@
       "typeVersion": 1,
       "position": [
         128,
-        -784
+        -1040
       ],
-      "id": "d4a5a7a8-a363-4b14-92c4-49f153ea2030",
+      "id": "28f6d233-620d-409f-aa39-6cd713078b1a",
       "name": "No Operation, do nothing2"
     },
     {
@@ -337,14 +337,14 @@
       "typeVersion": 4.7,
       "position": [
         416,
-        -976
+        -1232
       ],
-      "id": "0c149af5-b9f2-4980-a792-4ff4cedd52e7",
+      "id": "d36c1a79-483a-413b-9579-d87086a54289",
       "name": "Add a new record in New Contact Table",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "yAvNuWD1j5ud3W6K",
-          "name": "Google Sheets account 2"
+          "id": "hPNLNZEOTm3PZrS3",
+          "name": "Google Sheets account"
         }
       }
     },
@@ -359,14 +359,14 @@
       "typeVersion": 2.1,
       "position": [
         416,
-        -784
+        -1040
       ],
-      "id": "a92e57f8-275b-4ed2-b877-ef66c8a3e7cc",
+      "id": "1cb67ad7-e8e6-463e-b96f-c5bd4ceb46ea",
       "name": "Send auto-acknowledgment email",
       "webhookId": "dcab04b4-7b78-48c5-91f8-f7c6d2909727",
       "credentials": {
         "gmailOAuth2": {
-          "id": "pNPwvjWOYj3aQ01B",
+          "id": "WoECcnCl9ev1tuxc",
           "name": "Gmail account"
         }
       }
@@ -382,14 +382,14 @@
       "typeVersion": 2.1,
       "position": [
         928,
-        -592
+        -848
       ],
-      "id": "fcddf62a-a8dc-42ec-bd28-cac3919eb915",
+      "id": "2bcb10d3-62b5-4dac-aa18-c1fb5d955ad8",
       "name": "Send a message to sales team",
       "webhookId": "0147d8cd-c5da-4a3b-97b7-4680f856d66e",
       "credentials": {
         "gmailOAuth2": {
-          "id": "pNPwvjWOYj3aQ01B",
+          "id": "WoECcnCl9ev1tuxc",
           "name": "Gmail account"
         }
       }
@@ -415,13 +415,13 @@
       "typeVersion": 1,
       "position": [
         352,
-        -592
+        -848
       ],
-      "id": "da2bc416-f8c8-46ca-8e6c-b6385217e6cf",
+      "id": "e36c0081-13d4-4432-a0fe-1c05647ed2bf",
       "name": "Draft the email",
       "credentials": {
         "googlePalmApi": {
-          "id": "X6YUxxMX811Irjah",
+          "id": "fWX7PGXpKXwd8M2r",
           "name": "Google Gemini(PaLM) Api account"
         }
       }
@@ -472,9 +472,9 @@
       "typeVersion": 2.3,
       "position": [
         -448,
-        -592
+        -848
       ],
-      "id": "0d14f0b5-6698-4046-9e77-e2c89a0e9e85",
+      "id": "dbbe1d77-0b05-4329-ac5f-597c212c2398",
       "name": "Contact Us Form",
       "webhookId": "63f9e5df-4caa-4d91-b790-ba9dbfa7a960"
     },
@@ -489,34 +489,33 @@
       "typeVersion": 2.1,
       "position": [
         -320,
-        -80
+        -336
       ],
-      "id": "1adb02a2-d722-4799-b5d0-ec87c5bb0c37",
+      "id": "e8e41023-0f4b-4514-8559-52305a07af62",
       "name": "Webhook",
       "webhookId": "778a86da-c77a-4c78-82ea-50e131b47e01",
       "credentials": {
         "jwtAuth": {
-          "id": "IQQF588zmpMZWdeZ",
-          "name": "JWT Auth account 2"
+          "id": "SvEzPo3OGOgQARwi",
+          "name": "JWT Auth account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
         "promptType": "define",
         "text": "={{ $json.body.message }}",
         "options": {
-          "systemPromptTemplate": "=You are an AI assistant helping MediBridge Health’s Technical Support Team quickly resolve incoming clinician or staff issues.  \n\n- Ticket submitted by: {{ $json.body.submitted_by.name }}\n- Role: {{ $json.body.submitted_by.role }}\n- Contact: {{ $json.body.submitted_by.email }} / {{ $json.body.submitted_by.mobile }}\n- Issue description: \"{{ $json.body.message }}\"\n- Additional metadata: {{ $json.body.ticket_id }}, {{ $json.body.submitted_at }}\n- Vector database search results: [list of relevant docs, or top N embeddings]\n\n\nYour task is to produce a concise, plain-English summary to help the support engineer resolve the issue faster. Include:\n\n\n1. **Original Question / Issue**: Restate the question in one clear sentence.  \n2. **Relevant Documentation**: List the 2–3 most relevant internal documents or guidance notes (title + brief description / key point).  \n3. **Suggested Next Steps**: Provide 2–3 actionable suggestions for the support staff to address the issue.  \n4. Keep the output in **plain English**, professional, summarize and highlight the most actionable info.  \n\nFormat the output like this:\n\n---\nHello Support Team,\n\nA new technical support ticket has been submitted. Here are the details:\n\nTicket Info:\n- Submitted by: \n- Role: \n- Contact: \n- Ticket ID: \n- Submitted At: \n- Original Message: \n\n**Support Request Summary:**  \n[Concise plain-English summary of the issue]\n\n**Relevant Documentation:**  \n- [List of key points, links, or instructions from vector DB results]\n\n**Suggested Next Steps:**  \n1. [Step-by-step guidance or links for resolution]\n2. [Optional: escalate if high urgency]\n---\n\nDo not include any filler text or explanations. Focus only on **what the support team needs to know and do**.\n\nIf you don't know the answer, just say that you don't know, don't try to make up an answer.\n----------------\nContext: {context}"
+          "systemPromptTemplate": "=You are an AI assistant helping MediBridge Health’s Technical Support Team quickly resolve incoming clinician or staff issues.  \n\n- Ticket submitted by: {{ $json.body.submitted_by.name }}\n- Role: {{ $json.body.submitted_by.role }}\n- Contact: {{ $json.body.submitted_by.email }} / {{ $json.body.submitted_by.mobile }}\n- Issue description: \"{{ $json.body.message }}\"\n- Additional metadata: {{ $json.body.ticket_id }}, {{ $json.body.submitted_at }}\n- Vector database search results: [list of relevant docs, or top N embeddings]\n\n\nYour task is to produce a concise, plain-English summary to help the support engineer resolve the issue faster. Include:\n\n\n1. **Original Question / Issue**: Restate the question in one clear sentence.  \n2. **Relevant Documentation**: List the 2–3 most relevant internal documents or guidance notes (Include the exact original title and number as written in the source document (Do not include internal reference codes or IDs such as INT-GUIDE-3.5), and quote or summarize the key content from that section that relates directly to the user’s issue).  \n3. **Suggested Next Steps**: Provide 2–3 actionable suggestions for the support staff to address the issue based on the relevant documentation.  \n4. Keep the output in **plain English**, professional, summarize and highlight the most actionable info.  \n\nFormat the output like this:\n\n---\nHello Support Team,\n\nA new technical support ticket has been submitted. Here are the details:\n\nTicket Info:\n- Submitted by: \n- Role: \n- Contact: \n- Ticket ID: \n- Submitted At: \n- Original Message: \n\n**Support Request Summary:**  \n[Concise plain-English summary of the issue]\n\n**Relevant Documentation:**  \n- [List of key points, links, or instructions from vector DB results]\n\n**Suggested Next Steps:**  \n1. [Step-by-step guidance or links for resolution]\n2. [Optional: escalate if high urgency]\n---\n\nDo not include any filler text or explanations. Focus only on **what the support team needs to know and do**.\n\nIf you don't know the answer, just say that you don't know, don't try to make up an answer.\n----------------\nContext: {context}"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
       "typeVersion": 1.6,
       "position": [
         -64,
-        -80
+        -336
       ],
-      "id": "c0f20755-73c5-44c0-bed6-26e98d6d047d",
+      "id": "3c1fc601-eec6-4d20-b3c0-600476923b7c",
       "name": "Question and Answer Chain"
     },
     {
@@ -528,13 +527,13 @@
       "typeVersion": 1,
       "position": [
         -96,
-        144
+        -112
       ],
-      "id": "ae41fe13-d633-4159-ab12-4ba26cd4e4b6",
+      "id": "e4dd6410-9386-4e5c-abcb-786b325282e5",
       "name": "Google Gemini Chat Model1",
       "credentials": {
         "googlePalmApi": {
-          "id": "X6YUxxMX811Irjah",
+          "id": "fWX7PGXpKXwd8M2r",
           "name": "Google Gemini(PaLM) Api account"
         }
       }
@@ -545,9 +544,9 @@
       "typeVersion": 1,
       "position": [
         32,
-        144
+        -112
       ],
-      "id": "f9aa17e1-d720-4969-8ca9-fe1a58dfb5dd",
+      "id": "5412db06-071a-4338-bdb9-57985293f8d2",
       "name": "Vector Store Retriever"
     },
     {
@@ -567,13 +566,13 @@
       "typeVersion": 1.3,
       "position": [
         32,
-        352
+        96
       ],
-      "id": "3416b4bc-b531-49b8-a1b6-2221e2e7f59a",
+      "id": "e7836cc7-b092-447c-b35b-4382fc889b0a",
       "name": "Pinecone Vector Store1",
       "credentials": {
         "pineconeApi": {
-          "id": "h7TDaK1iZTFm1gMt",
+          "id": "G3tRev9RsBUaFva1",
           "name": "PineconeApi account"
         }
       }
@@ -584,13 +583,13 @@
       "typeVersion": 1,
       "position": [
         48,
-        560
+        304
       ],
-      "id": "3074de4b-8d86-449f-a272-49505e487643",
+      "id": "e33e0d2d-ca8c-4cd8-b0da-7a9fa51d453d",
       "name": "Embeddings Google Gemini1",
       "credentials": {
         "googlePalmApi": {
-          "id": "X6YUxxMX811Irjah",
+          "id": "fWX7PGXpKXwd8M2r",
           "name": "Google Gemini(PaLM) Api account"
         }
       }
@@ -601,13 +600,13 @@
       "typeVersion": 1,
       "position": [
         176,
-        560
+        304
       ],
-      "id": "e614bd2a-672c-40d4-b9fc-5055d994ffb9",
+      "id": "2419cb5a-5781-4ac2-8c72-fe40f173428a",
       "name": "Reranker Cohere",
       "credentials": {
         "cohereApi": {
-          "id": "FzJBB7ERJwf7Pfr3",
+          "id": "j4zTtiuMcONRuemR",
           "name": "CohereApi account"
         }
       }
@@ -621,9 +620,9 @@
       "typeVersion": 1,
       "position": [
         480,
-        -1264
+        -1520
       ],
-      "id": "d9adf1ba-36c3-4da8-ac52-4ca29b3f3e7a",
+      "id": "906446b5-a400-4e14-a22c-d2c7e87c672a",
       "name": "Recursive Character Text Splitter"
     },
     {
@@ -636,9 +635,9 @@
       "typeVersion": 1,
       "position": [
         400,
-        -80
+        -336
       ],
-      "id": "21949251-8f5a-41a2-ac12-b985171e13e7",
+      "id": "102ca266-2268-436d-997b-3810de07cbda",
       "name": "Markdown1"
     },
     {
@@ -652,14 +651,14 @@
       "typeVersion": 2.1,
       "position": [
         624,
-        -80
+        -336
       ],
-      "id": "518a65fe-106b-4dd6-96d7-758d7f40f192",
+      "id": "ff461f52-0bac-43c8-8e47-b583f46af76a",
       "name": "Send a message to technical support team",
       "webhookId": "0147d8cd-c5da-4a3b-97b7-4680f856d66e",
       "credentials": {
         "gmailOAuth2": {
-          "id": "pNPwvjWOYj3aQ01B",
+          "id": "WoECcnCl9ev1tuxc",
           "name": "Gmail account"
         }
       }
@@ -673,10 +672,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -576,
-        -1040
+        -1296
       ],
       "typeVersion": 1,
-      "id": "67292f00-9d50-4c22-8023-0cb51f8b1da1",
+      "id": "70b3fffd-aaed-49a7-a771-f4b79d0601ec",
       "name": "Sticky Note1"
     },
     {
@@ -688,10 +687,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -576,
-        -176
+        -432
       ],
       "typeVersion": 1,
-      "id": "073e8a7e-a797-4537-a0d1-327ab3e55955",
+      "id": "a135e5f6-d11d-4ab8-9e4e-af08e777cc16",
       "name": "Sticky Note2"
     },
     {
@@ -798,34 +797,19 @@
       "typeVersion": 4.7,
       "position": [
         416,
-        -400
+        -656
       ],
-      "id": "308c9c43-d9ac-4fbb-958e-32a6d049a2f6",
+      "id": "801ee0dc-3448-4fea-9978-12c62c634cf5",
       "name": "Add a new record",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "yAvNuWD1j5ud3W6K",
-          "name": "Google Sheets account 2"
+          "id": "hPNLNZEOTm3PZrS3",
+          "name": "Google Sheets account"
         }
       }
     }
   ],
-  "pinData": {
-    "Contact Us Form": [
-      {
-        "json": {
-          "First name": "Peter",
-          "Last Name": "Zhang",
-          "Work email": "xu541197672@gmail.com",
-          "Contact number": "0274734266",
-          "Organisation name": "Middlemore Hospital",
-          "Message": "We are planning to adopt Heidi. We would like to know the pricing, training plan",
-          "submittedAt": "2025-09-21T11:55:49.866+12:00",
-          "formMode": "test"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "connections": {
     "Text Classifier": {
       "main": [
@@ -842,10 +826,7 @@
             "type": "main",
             "index": 0
           }
-        ],
-        [],
-        [],
-        []
+        ]
       ]
     },
     "Google Drive Trigger": {
@@ -944,11 +925,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Add a new record in New Contact Table": {
-      "main": [
-        []
       ]
     },
     "Draft the email": {
@@ -1084,15 +1060,22 @@
       ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "53d49d1b-49ff-4f34-872c-45ab0dc86ef8",
+  "versionId": "2772a06e-2f8d-4144-8c5f-2374f2258e76",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "b6970bc56a14a1bd0b6ef83593f58eb8bb54c69fa18b29d5790d2a877acefd6d"
+    "instanceId": "5097ce3981e3361ba335062b855d8d26e075fd85843dda8b41056c1c49400100"
   },
-  "id": "cgVL3s0UWZ9Gczfp",
-  "tags": []
+  "id": "IfPATAEgKqPupKjx",
+  "tags": [
+    {
+      "updatedAt": "2025-11-04T07:00:45.424Z",
+      "createdAt": "2025-11-04T07:00:45.424Z",
+      "id": "5YZsxbSoF1TXraOl",
+      "name": "Healthcare Automation"
+    }
+  ]
 }
